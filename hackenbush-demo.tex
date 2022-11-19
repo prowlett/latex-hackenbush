@@ -1,0 +1,100 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{a4wide}
+
+\usepackage{hackenbush} % the Hackenbush code is in hackenbush.sty
+
+\title{Some commands for drawing Hackenbush pictures}
+\author{Peter Rowlett}
+\date{19 Nov 2022}
+
+\begin{document}
+	
+	\maketitle
+	
+	Basically, draw a line and it will put nodes at either end. Lines can be `L' for Left or `R' for Right, e.g. \verb|\draw[L]|. Usual tikz line drawing should work fine.
+	
+	\begin{tikzpicture}
+		\draw[L] (0,0) -- (1,1);
+		
+		\draw[L] (2,0) to[bend right] (3,2);
+		\draw[R] (2,0) to[bend left] (3,2);
+		
+		\draw[R] (4,0) arc (-90:270:3ex);
+		
+		\draw[L] (5,0) .. controls ++(0,3) and ++(0,-3) .. (8,2); % I'm unsure why this doesn't end in a node, adding one manually:
+		\node[joindot] at (8,2) {};
+	\end{tikzpicture}
+
+	You can also draw a thin line using `floor' as \verb|\draw[floor]|.
+	
+	\begin{tikzpicture}
+		\draw[floor] (0.5,0) -- (2.5,0);
+		
+		\draw[L] (1,0) -- (1.5,1);
+		\draw[R] (2,0) -- (1.5,1);
+	\end{tikzpicture}
+
+	You can set the colours using \verb|\setcolours{left colour}{right colour}|. For example:
+	
+	\setcolours{black}{gray}
+	
+	\begin{tikzpicture}
+		\draw[L] (2,0) to[bend right] (3,2);
+		\draw[R] (2,0) to[bend left] (3,2);
+	\end{tikzpicture}
+	\setcolours{lime}{yellow}
+	\begin{tikzpicture}
+		\draw[L] (2,0) to[bend right] (3,2);
+		\draw[R] (2,0) to[bend left] (3,2);
+	\end{tikzpicture}
+	\setcolours{red}{blue}
+	\begin{tikzpicture}
+		\draw[L] (2,0) to[bend right] (3,2);
+		\draw[R] (2,0) to[bend left] (3,2);
+	\end{tikzpicture}
+	\setcolours{violet}{magenta}
+	\begin{tikzpicture}
+		\draw[L] (2,0) to[bend right] (3,2);
+		\draw[R] (2,0) to[bend left] (3,2);
+	\end{tikzpicture}
+	\setcolours{brown}{teal}
+	\begin{tikzpicture}
+		\draw[L] (2,0) to[bend right] (3,2);
+		\draw[R] (2,0) to[bend left] (3,2);
+	\end{tikzpicture}
+	
+	To change back to the default red and blue, use \verb|\defaultcolours|.
+	
+	\defaultcolours
+	
+	\begin{tikzpicture}
+		\draw[L] (2,0) to[bend right] (3,2);
+		\draw[R] (2,0) to[bend left] (3,2);
+	\end{tikzpicture}
+
+	The drawing is a \verb|tikzpicture|, so responds to \verb|scale| etc. in the usual way. In addition, the line thickness and node size are defined in ex, so if you specify coordinates in ex too then the picture will respond to standard \LaTeX\ sizes. Here are \verb|\tiny|, \verb|normalsize| and \verb|Huge|
+
+	{\tiny\begin{tikzpicture} % chair
+		\draw[floor] (3ex,0 ex) -- (12ex,0 ex);
+		
+		\draw[L] (5 ex,0 ex) -- (5 ex,5 ex);
+		\draw[L] (10 ex,0 ex) -- (10 ex,5 ex);
+		\draw[R] (5 ex,5 ex) -- (10 ex,5 ex);
+		\draw[R] (5 ex,5 ex) -- (5 ex,10 ex);
+	\end{tikzpicture}} \begin{tikzpicture} % chair
+		\draw[floor] (3ex,0 ex) -- (12ex,0 ex);
+		
+		\draw[L] (5 ex,0 ex) -- (5 ex,5 ex);
+		\draw[L] (10 ex,0 ex) -- (10 ex,5 ex);
+		\draw[R] (5 ex,5 ex) -- (10 ex,5 ex);
+		\draw[R] (5 ex,5 ex) -- (5 ex,10 ex);
+	\end{tikzpicture} {\Huge\begin{tikzpicture} % chair
+		\draw[floor] (3ex,0 ex) -- (12ex,0 ex);
+		
+		\draw[L] (5 ex,0 ex) -- (5 ex,5 ex);
+		\draw[L] (10 ex,0 ex) -- (10 ex,5 ex);
+		\draw[R] (5 ex,5 ex) -- (10 ex,5 ex);
+		\draw[R] (5 ex,5 ex) -- (5 ex,10 ex);
+	\end{tikzpicture}}
+
+\end{document}

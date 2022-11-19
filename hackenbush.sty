@@ -1,0 +1,29 @@
+\newcommand{\Lcolour}{blue}
+\newcommand{\Rcolour}{red}
+\newcommand{\setcolours}[2]{%
+	\renewcommand{\Lcolour}{#1}
+	\renewcommand{\Rcolour}{#2}
+}
+\newcommand{\defaultcolours}{%
+	\renewcommand{\Lcolour}{blue}
+	\renewcommand{\Rcolour}{red}
+}
+
+\usepackage{tikz}
+\usetikzlibrary {decorations.markings}
+\tikzset{
+	floor/.style={line width=0.1ex,gray},
+	joindot/.style={circle,line width=0.1ex,inner sep=0.5ex,draw,black,fill=white},
+	enddots/.style={postaction=decorate,decoration={
+			markings,mark=at position 0 with {
+				\node[joindot] {};
+			},mark=at position 1 with {
+				\node[joindot] {};
+		}},
+	},
+	L/.style={line width=1ex,\Lcolour,enddots},
+	R/.style={line width=1ex,\Rcolour,enddots}
+}
+\newcommand{\hackenbushtablerow}[6]{%
+	\small#1 & \(\Bigg\{ \text{#2} ~~\Bigg|~~ \text{#3}\Bigg\} = \{#4~|~#5\} = #6\)\\
+}
